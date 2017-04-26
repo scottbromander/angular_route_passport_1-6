@@ -12,7 +12,19 @@ router.get('/', function(req, res, next) {
 
 // Handles POST request with new user data
 router.post('/', function(req, res, next) {
-    Users.create(req.body, function(err, post) {
+  /*
+  username: {type: String, required: true, index: {unique: true}},
+  password: {type: String, required: true},
+  recipes: {type: Array}
+  */
+    var userToSave = {
+      username : req.body.username,
+      password : req.body.password,
+      recipes : []
+    };
+
+
+    Users.create(userToSave, function(err, post) {
          if(err) {
            // next() here would continue on and route to routes/index.js
            next(err);
